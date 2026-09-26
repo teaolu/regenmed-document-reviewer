@@ -1,38 +1,32 @@
-# RegenMed Internal Document Reviewer — Free Starter
+# RegenMed Internal Document Reviewer — Free Version 2
 
-This starter uses no paid AI API and needs no API key.
+No paid AI API. No API key.
 
-## What this first version does
+## Version 2 milestone
 
-- Uploads one PDF
-- Converts PDF pages to images
-- Runs local Tesseract OCR
-- Detects:
-  - MP-F-023
-  - QS-F-049
-  - Lot Log / MP-F-021
-  - Discard Form / MP-F-018
-- Shows a preview and OCR text
+- PDF upload
+- Local Tesseract OCR
+- Form classification
+- MP-F-023 computer-vision validation:
+  - top required fields
+  - By/Date initials and date presence
+  - Operations Manager Review
+  - Produced and Packaged processing cells
 
-Field-level validation is intentionally the next step after deployment is confirmed.
+QS-F-049 and Lot Log validators are the next milestones.
 
-## Free stack
+## Updating an existing Streamlit deployment
 
-- Streamlit
-- PyMuPDF
-- OpenCV
-- Tesseract OCR
-- Python
+Replace/add the files in the GitHub repository:
+- app.py
+- document_reader.py
+- mp023_validator.py
+- requirements.txt
+- packages.txt
 
-## Deploy on Streamlit Community Cloud
+Commit the changes. Streamlit Community Cloud should rebuild the app from GitHub.
 
-1. Create a GitHub repository.
-2. Upload all files from this project to the repository root.
-3. Open Streamlit Community Cloud.
-4. Create a new app from the repository.
-5. Main file path: `app.py`
-6. Deploy.
+## Important
 
-There are no secrets and no API keys to configure.
-
-`packages.txt` tells Streamlit Cloud to install the system-level Tesseract OCR package.
+This version uses normalized form coordinates because the hackathon forms have known layouts.
+It is intended for unseen filled-out copies of the same MP-F-023 template, not arbitrary documents.

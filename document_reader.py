@@ -1,5 +1,3 @@
-from io import BytesIO
-
 import cv2
 import fitz
 import numpy as np
@@ -25,7 +23,6 @@ def render_pdf_pages(pdf_bytes: bytes, zoom: float = 2.0):
 
 
 def preprocess_for_ocr(image: Image.Image) -> Image.Image:
-    """Improve contrast for printed-text OCR."""
     arr = np.array(image.convert("RGB"))
     gray = cv2.cvtColor(arr, cv2.COLOR_RGB2GRAY)
     gray = cv2.GaussianBlur(gray, (3, 3), 0)
@@ -46,10 +43,7 @@ def ocr_image(image: Image.Image) -> str:
 
 
 def detect_form_type(text: str):
-    """
-    Detect the form from printed headings/form codes rather than the filename.
-    Returns (form_type, explanation).
-    """
+    """Detect the form using printed headings/form codes, not the filename."""
     t = " ".join(text.upper().split())
 
     checks = [
